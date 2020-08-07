@@ -7,3 +7,4 @@ biopython==1.77
 neatbio == 0.0.2
 requests == 2.24.0
 stmol == 0.0.4
+streamlit.components.v1==0.64.0
