@@ -147,23 +147,23 @@ def main():
                 
     elif choice == "ProteinSearch":
         st.subheader("Search for Papers Related to a Protein")
-        ace2 = st.text_input("Query Protein", 'ACE2')
-        disease = st.text_input("Query Disease", 'coronavirus')
+        ace2 = st.text_input("Query Protein")
+        disease = st.text_input("Query Disease")
 
-
-        protein = req.get('https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=10&gene='+ace2+'&organism=homo%20sapiens', headers = {'Accept':"application/json"})
-        for i,v in enumerate(protein.json()[0]['references']):
-            counter = 1
-            try:
-                title = protein.json()[0]['references'][i]['citation']['title']
-                if counter ==10:
-                    break
+        if ace2 and disease is not None:
+            protein = req.get('https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=10&gene='+ace2+'&organism=homo%20sapiens', headers = {'Accept':"application/json"})
+            for i,v in enumerate(protein.json()[0]['references']):
+                counter = 1
+                try:
+                    title = protein.json()[0]['references'][i]['citation']['title']
+                    if counter ==10:
+                        break
             
-                if title.find(disease) != -1:
-                    st.write(title)
-                    counter +=1
-            except:
-                pass
+                    if title.find(disease) != -1:
+                        st.write(title)
+                        counter +=1
+                except:
+                    pass
             
     elif choice == "DotPlot":
         st.subheader("Generate Dot Plot For Two Sequences")
