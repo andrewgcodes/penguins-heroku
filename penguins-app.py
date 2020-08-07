@@ -147,8 +147,10 @@ def main():
                 
     elif choice == "ProteinSearch":
         st.subheader("Search for Papers Related to a Protein")
+        st.write(""" Try entering ACE2 and coronavirus!""")
+
         ace2 = st.text_input("Query Protein")
-        disease = st.text_input("Query Disease")
+        disease = st.text_input("Query Specifier (more specific thing to narrow down papers with)")
 
         if ace2 and disease is not None:
             protein = req.get('https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=10&gene='+ace2+'&organism=homo%20sapiens', headers = {'Accept':"application/json"})
