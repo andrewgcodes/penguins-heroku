@@ -189,7 +189,7 @@ def main():
     elif choice == "About":
         st.subheader("About")
 
-
+        st.write(""" This web app is a fun tool for exploring bioinformatics. """)
 
 
 
