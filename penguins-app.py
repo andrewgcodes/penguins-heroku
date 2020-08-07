@@ -152,10 +152,10 @@ def main():
 
 
         protein = req.get('https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=10&gene='+ace2+'&organism=homo%20sapiens', headers = {'Accept':"application/json"})
-        for i,v in enumerate(ace2.json()[0]['references']):
+        for i,v in enumerate(protein.json()[0]['references']):
             counter = 1
             try:
-                title = ace2.json()[0]['references'][i]['citation']['title']
+                title = protein.json()[0]['references'][i]['citation']['title']
                 if counter ==10:
                     break
             
