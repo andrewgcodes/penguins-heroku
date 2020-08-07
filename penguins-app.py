@@ -64,6 +64,8 @@ def main():
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
+        st.write(""" This is a bioinformatics web app made with Python and Streamlit.""")
+
     elif choice == "DNA Sequence":
         st.subheader("DNA Sequence Analysis")
 
