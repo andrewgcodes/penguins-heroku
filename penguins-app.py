@@ -9,6 +9,7 @@ import neatbio.sequtils as utils
 import numpy as np 
 from PIL import Image 
 import requests as req
+from stmol import component_3dmol
 
 def delta(x,y):
     return 0 if x == y else 1
@@ -61,7 +62,7 @@ def main():
     """A Simple Streamlit App """
     st.title("BioInformatics App")
 
-    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"About"]
+    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer"]
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
@@ -203,11 +204,10 @@ def main():
 
 
 
-    elif choice == "About":
-        st.subheader("About")
+    elif choice == "MoleculeVisualizer":
+        st.subheader("Look at a molecule! Pre-loaded example is the Covid-19 Spike Protein.")
 
-        st.write(""" This web app is a fun tool for exploring bioinformatics. """)
-
+        component_3dmol()
 
 
 
