@@ -8,6 +8,7 @@ from collections import Counter
 import neatbio.sequtils as utils
 import numpy as np 
 from PIL import Image 
+import requests as req
 
 def delta(x,y):
     return 0 if x == y else 1
@@ -60,13 +61,13 @@ def main():
     """A Simple Streamlit App """
     st.title("BioInformatics App")
 
-    activity = ['Intro','DNA','DotPlot',"About"]
+    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"About"]
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
         st.write(""" This is a bioinformatics web app made with Python and Streamlit. Use the left panel dropdown to choose the various features to use.""")
 
-    elif choice == "DNA":
+    elif choice == "SequenceAnalysis":
         st.subheader("DNA Sequence Analysis")
 
         seq_file = st.file_uploader("Upload FASTA File",type=["fasta","fa"])
@@ -144,14 +145,26 @@ def main():
                 st.write("=====================")
                 st.write(utils.get_acid_name(aa3))
                 
-                
+    elif choice == "ProteinSearch":
+        st.subheader("Search for Papers Related to a Protein")
+        ace2 = st.text_input("Query Protein")
+        disease = st.text_input("Query Disease")
 
 
-
-            # Top Most Common Amino
-
-
-
+        protein = req.get('https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=10&gene='+ace2+'&organism=homo%20sapiens', headers = {'Accept':"application/json"})
+        for i,v in enumerate(ace2.json()[0]['references']):
+            counter = 1
+            try:
+                title = ace2.json()[0]['references'][i]['citation']['title']
+                if counter ==10:
+                    break
+            
+                if title.find(disease) != -1:
+                    st.write(title)
+                    counter +=1
+            except:
+                pass
+            
     elif choice == "DotPlot":
         st.subheader("Generate Dot Plot For Two Sequences")
         seq_file1 = st.file_uploader("Upload 1st FASTA File",type=["fasta","fa"])
