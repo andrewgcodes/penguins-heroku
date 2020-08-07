@@ -66,7 +66,7 @@ def main():
         st.subheader("Intro")
         st.write(""" This is a bioinformatics web app made with Python and Streamlit.""")
 
-    elif choice == "DNA Sequence":
+    elif choice == "DNA":
         st.subheader("DNA Sequence Analysis")
 
         seq_file = st.file_uploader("Upload FASTA File",type=["fasta","fa"])
