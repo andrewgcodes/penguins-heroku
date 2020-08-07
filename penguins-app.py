@@ -147,8 +147,8 @@ def main():
                 
     elif choice == "ProteinSearch":
         st.subheader("Search for Papers Related to a Protein")
-        ace2 = st.text_input("Query Protein")
-        disease = st.text_input("Query Disease")
+        ace2 = st.text_input("Query Protein", 'ACE2')
+        disease = st.text_input("Query Disease", 'coronavirus')
 
 
         protein = req.get('https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=10&gene='+ace2+'&organism=homo%20sapiens', headers = {'Accept':"application/json"})
