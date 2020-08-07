@@ -9,6 +9,7 @@ import neatbio.sequtils as utils
 import numpy as np 
 from PIL import Image 
 import requests as req
+import stmol
 from stmol import component_3dmol
 
 def delta(x,y):
