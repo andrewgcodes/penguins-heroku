@@ -14,6 +14,8 @@ from stmol import component_3dmol
 #from rdkit import Chem
 #from rdkit.Chem import Descriptors, Lipinski
 import kinetics
+import pubchempy as pcp
+from pubchempy import get_compounds, Compound
 #def lipinski(smile):
 	# Convert into Chem object
 #	mol = Chem.MolFromSmiles(smile)
@@ -76,7 +78,7 @@ def main():
     """A Simple Streamlit App """
     st.title("BioInformatics App")
 
-    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "Lipinski"]
+    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "ChemicalSearch"]
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
@@ -224,17 +226,24 @@ def main():
         component_3dmol()
 	
 
-    elif choice == "Lipinski":
+    elif choice == "ChemicalSearch":
         
         st.title("Molecular Descriptors Calculator [UNDER CONSTRUCTION]")
-        user_smile = st.text_input("Enter SMILES format")
+	user_compound = st.text_input("Enter compound name")
 
+        if user_compound != None:
+	    results = pcp.get_compounds(user_compound, 'name')
+	    for compound in results:
+	        st.write(compound.isomeric_smiles)
+        user_smile = st.text_input("Enter SMILES format")
+	if user_smile != None:
+	    pcp.get_compounds(user_smile, 'smiles')
 #        hDonar = (lipinski(user_smile)[0])
  #       hAccep = (lipinski(user_smile)[1])
 #       molWgt = (lipinski(user_smile)[2])
 #        logPVa = (lipinski(user_smile)[3])
 
-        st.header("Lipinski's Descriptors Values")
+       # st.header("Lipinski's Descriptors Values")
 
    #     st.write(pd.DataFrame({
 
