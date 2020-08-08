@@ -11,19 +11,19 @@ import numpy as np
 from PIL import Image 
 import requests as req
 from stmol import component_3dmol
-from rdkit import Chem
-from rdkit.Chem import Descriptors, Lipinski
+#from rdkit import Chem
+#from rdkit.Chem import Descriptors, Lipinski
 
-def lipinski(smile):
+#def lipinski(smile):
 	# Convert into Chem object
-	mol = Chem.MolFromSmiles(smile)
+#	mol = Chem.MolFromSmiles(smile)
 
-	MolWt = Descriptors.MolWt(mol)
-	MolLogP = Descriptors.MolLogP(mol)
-	NumHDonors = Lipinski.NumHDonors(mol)
-	NumHAcceptors = Lipinski.NumHAcceptors(mol)
+#	MolWt = Descriptors.MolWt(mol)
+#	MolLogP = Descriptors.MolLogP(mol)
+#	NumHDonors = Lipinski.NumHDonors(mol)
+#	NumHAcceptors = Lipinski.NumHAcceptors(mol)
 
-	return NumHDonors, NumHAcceptors, MolWt, MolLogP
+#	return NumHDonors, NumHAcceptors, MolWt, MolLogP
 
 def delta(x,y):
     return 0 if x == y else 1
@@ -225,23 +225,23 @@ def main():
         
     elif choice == "Lipinski":
         
-        st.title("Molecular Descriptors Calculator")
+        st.title("Molecular Descriptors Calculator [UNDER CONSTRUCTION]")
         user_smile = st.text_input("Enter SMILES format")
 
-        hDonar = (lipinski(user_smile)[0])
-        hAccep = (lipinski(user_smile)[1])
-        molWgt = (lipinski(user_smile)[2])
-        logPVa = (lipinski(user_smile)[3])
+#        hDonar = (lipinski(user_smile)[0])
+ #       hAccep = (lipinski(user_smile)[1])
+#       molWgt = (lipinski(user_smile)[2])
+#        logPVa = (lipinski(user_smile)[3])
 
         st.header("Lipinski's Descriptors Values")
 
-        st.write(pd.DataFrame({
+   #     st.write(pd.DataFrame({
 
-            'H Donars': pd.Series(hDonar),
-            'H Acceptors': pd.Series(hAccep),
-            'Molecular Mass (Dalton)': pd.Series(molWgt),
-            'LogP': pd.Series(logPVa)
-                }))
+#            'H Donars': pd.Series(hDonar),
+   #         'H Acceptors': pd.Series(hAccep),
+#            'Molecular Mass (Dalton)': pd.Series(molWgt),
+       #     'LogP': pd.Series(logPVa)
+      #          }))
 
 
 
