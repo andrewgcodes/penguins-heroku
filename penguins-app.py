@@ -13,7 +13,7 @@ import requests as req
 from stmol import component_3dmol
 #from rdkit import Chem
 #from rdkit.Chem import Descriptors, Lipinski
-
+import kinetics
 #def lipinski(smile):
 	# Convert into Chem object
 #	mol = Chem.MolFromSmiles(smile)
@@ -76,7 +76,7 @@ def main():
     """A Simple Streamlit App """
     st.title("BioInformatics App")
 
-    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "Lipinski"]
+    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "EnzymeKinetics", "Lipinski"]
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
@@ -222,7 +222,45 @@ def main():
         st.subheader("Look at a molecule! Pre-loaded example is the Covid-19 Spike Protein.")
 
         component_3dmol()
-        
+	
+    elif choice == "EnzymeKinetics":
+	st.write("This is more of a playground than a super accurate tool so take it with a grain of salt. It assumes that A is the substrate of enzyme 1, and enzyme 1 is the substrate of enzyme 2.")
+
+	duration = st.text_input("Enter experiment duration in minutes", 120)
+        enzyme1kcat = st.text_input("Enter enzyme #1 kcat", 200)
+        enzyme2kcat = st.text_input("Enter enzyme #2 kcat",30)
+        enzyme1km = st.text_input("Enter enzyme #1 km", 8000)
+        enzyme2km = st.text_input("Enter enzyme #2 km",2000)
+        substrateConc = st.text_input("Enter primary substrate concentration (A)",10000)
+        enzyme1Conc = st.text_input("Enter enzyme 1 concentration (B)",4)
+        enzyme2Conc = st.text_input("Enter enzyme 2 concentration (C)",10)
+
+	enzyme_1 = kinetics.Uni(kcat='enz1_kcat', kma='enz1_km', enz='enz_1', a='A', substrates=['A'], products=['B'])
+
+        enzyme_1.parameters = {'enz1_kcat' : enzyme1kcat,'enz1_km' : enzyme1km}
+
+        enzyme_2 = kinetics.Uni(kcat='enz2_kcat', kma='enz2_km', enz='enz_2', a='B', substrates=['B'], products=['C'])
+
+        enzyme_2.parameters = {'enz2_kcat' : enzyme2kcat, 'enz2_km' : enzyme2km}
+
+	# Set up the model
+	model = kinetics.Model(logging=False)
+	model.append(enzyme_1)
+	model.append(enzyme_2)
+	model.set_time(0, duration, 1000) # 120 mins, 1000 timepoints.
+
+	# Set starting concentrations
+	model.species = {"A" : substrateConc,
+			 "enz_1" : enzyme1Conc,
+			 "enz_2" : enzyme2Conc}
+	model.setup_model()
+
+	# Run and plot the model
+	model.run_model()
+	model.plot_substrate('A')
+	model.plot_substrate('B')
+	model.plot_substrate('C', plot=True)
+	
     elif choice == "Lipinski":
         
         st.title("Molecular Descriptors Calculator [UNDER CONSTRUCTION]")
