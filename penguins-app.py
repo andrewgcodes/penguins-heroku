@@ -224,8 +224,7 @@ def main():
         component_3dmol()
 	
     elif choice == "EnzymeKinetics":
-	st.write("This is more of a playground than a super accurate tool so take it with a grain of salt. It assumes that A is the substrate of enzyme 1, and enzyme 1 is the substrate of enzyme 2.")
-
+        st.write("This is more of a playground than a super accurate tool so take it with a grain of salt. It assumes that A is the substrate of enzyme 1, and enzyme 1 is the substrate of enzyme 2.")
 	duration = st.text_input("Enter experiment duration in minutes", 120)
         enzyme1kcat = st.text_input("Enter enzyme #1 kcat", 200)
         enzyme2kcat = st.text_input("Enter enzyme #2 kcat",30)
@@ -243,19 +242,14 @@ def main():
 
         enzyme_2.parameters = {'enz2_kcat' : enzyme2kcat, 'enz2_km' : enzyme2km}
 
-	# Set up the model
 	model = kinetics.Model(logging=False)
 	model.append(enzyme_1)
 	model.append(enzyme_2)
-	model.set_time(0, duration, 1000) # 120 mins, 1000 timepoints.
+	model.set_time(0, duration, 1000) 
 
-	# Set starting concentrations
-	model.species = {"A" : substrateConc,
-			 "enz_1" : enzyme1Conc,
-			 "enz_2" : enzyme2Conc}
+	model.species = {"A" : substrateConc,"enz_1" : enzyme1Conc,"enz_2" : enzyme2Conc}
 	model.setup_model()
 
-	# Run and plot the model
 	model.run_model()
 	model.plot_substrate('A')
 	model.plot_substrate('B')
