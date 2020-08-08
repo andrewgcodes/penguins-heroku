@@ -224,10 +224,10 @@ def main():
         component_3dmol()
 	
     elif choice == "EnzymeKinetics":
-	duration = st.text_input("Enter experiment duration in minutes", 120)
-        enzyme1kcat = st.text_input("Enter enzyme #1 kcat", 200)
+	duration = st.text_input("Enter experiment duration in minutes",120)
+        enzyme1kcat = st.text_input("Enter enzyme #1 kcat",200)
         enzyme2kcat = st.text_input("Enter enzyme #2 kcat",30)
-        enzyme1km = st.text_input("Enter enzyme #1 km", 8000)
+        enzyme1km = st.text_input("Enter enzyme #1 km",8000)
         enzyme2km = st.text_input("Enter enzyme #2 km",2000)
         substrateConc = st.text_input("Enter primary substrate concentration (A)",10000)
         enzyme1Conc = st.text_input("Enter enzyme 1 concentration (B)",4)
@@ -244,7 +244,7 @@ def main():
 	model = kinetics.Model(logging=False)
 	model.append(enzyme_1)
 	model.append(enzyme_2)
-	model.set_time(0, duration, 1000) 
+	model.set_time(0,duration,1000) 
 
 	model.species = {"A" : substrateConc,"enz_1" : enzyme1Conc,"enz_2" : enzyme2Conc}
 	model.setup_model()
@@ -252,7 +252,7 @@ def main():
 	model.run_model()
 	model.plot_substrate('A')
 	model.plot_substrate('B')
-	model.plot_substrate('C', plot=True)
+	model.plot_substrate('C',plot=True)
 	st.pyplot()
     elif choice == "Lipinski":
         
