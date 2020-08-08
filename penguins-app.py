@@ -236,18 +236,14 @@ def main():
 		
 	        vioxx = Compound.from_cid(compound.cid)
                 try:
-		    print vioxx.molecular_formula
-	        except:
-		    pass
-	        try:
-                    print vioxx.molecular_weight
-	        except:
-		    pass
-	        try:
-                    print vioxx.xlogp
-	        except:
-		    pass
-
+		    st.write(vioxx.molecular_formula)
+	  
+                    st.write(vioxx.molecular_weight)
+	    	    st.write(vioxx.iupac_name)
+	
+                    st.write(vioxx.xlogp)
+	
+	
         user_smile = st.text_input("Enter SMILES format")
         if user_smile != None:
 	    pcp.get_compounds(user_smile, 'smiles')
