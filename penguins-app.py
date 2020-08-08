@@ -229,7 +229,7 @@ def main():
         st.title("Search for chemicals and get info.")
         user_compound = st.text_input("Enter compound name")
         if user_compound != None:
-	    results = pcp.get_compounds(user_compound, 'name')
+	    results = pcp.get_compounds(user_compound,'name')
 	    for compound in results:
 	        st.write(compound.cid)
 	        st.write(compound.isomeric_smiles)
