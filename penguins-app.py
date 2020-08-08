@@ -228,6 +228,7 @@ def main():
     elif choice == "ChemicalSearch":
         st.title("Search for chemicals and get info. Pre-loaded example: imatinib")
         user_compound = st.text_input("Enter compound name", 'imatinib')
+        user_smile = st.text_input("Enter SMILES format", 'CC1=C(C=C(C=C1)NC(=O)C2=CC=C(C=C2)CN3CCN(CC3)C)NC4=NC=CC(=N4)C5=CN=CC=C5')
         if user_compound is not None:
             results = pcp.get_compounds(user_compound,'name')
             for compound in results:
@@ -241,7 +242,6 @@ def main():
                 st.write(vioxx.xlogp)
     
     
-        user_smile = st.text_input("Enter SMILES format", 'CC1=C(C=C(C=C1)NC(=O)C2=CC=C(C=C2)CN3CCN(CC3)C)NC4=NC=CC(=N4)C5=CN=CC=C5')
         if user_smile != None:
             pcp.get_compounds(user_smile, 'smiles')
 
