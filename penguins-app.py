@@ -76,7 +76,7 @@ def main():
     """A Simple Streamlit App """
     st.title("BioInformatics App")
 
-    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "EnzymeKinetics", "Lipinski"]
+    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "Lipinski"]
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
@@ -223,8 +223,6 @@ def main():
 
         component_3dmol()
 	
-    elif choice == "EnzymeKinetics":
-	st.subheader("[UNDER CONSTRUCTION]")
 
     elif choice == "Lipinski":
         
