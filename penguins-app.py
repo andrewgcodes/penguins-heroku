@@ -17,15 +17,15 @@ import kinetics
 import pubchempy as pcp
 from pubchempy import get_compounds, Compound
 #def lipinski(smile):
-	# Convert into Chem object
-#	mol = Chem.MolFromSmiles(smile)
+    # Convert into Chem object
+#    mol = Chem.MolFromSmiles(smile)
 
-#	MolWt = Descriptors.MolWt(mol)
-#	MolLogP = Descriptors.MolLogP(mol)
-#	NumHDonors = Lipinski.NumHDonors(mol)
-#	NumHAcceptors = Lipinski.NumHAcceptors(mol)
+#    MolWt = Descriptors.MolWt(mol)
+#    MolLogP = Descriptors.MolLogP(mol)
+#    NumHDonors = Lipinski.NumHDonors(mol)
+#    NumHAcceptors = Lipinski.NumHAcceptors(mol)
 
-#	return NumHDonors, NumHAcceptors, MolWt, MolLogP
+#    return NumHDonors, NumHAcceptors, MolWt, MolLogP
 
 def delta(x,y):
     return 0 if x == y else 1
@@ -224,31 +224,27 @@ def main():
         st.subheader("Look at a molecule! Pre-loaded example is the Covid-19 Spike Protein.")
 
         component_3dmol()
-	
+    
     elif choice == "ChemicalSearch":
         st.title("Search for chemicals and get info.")
         user_compound = st.text_input("Enter compound name")
         if user_compound is not None:
-	    results = pcp.get_compounds(user_compound,'name')
-	    for compound in results:
-	        st.write(compound.cid)
-	        st.write(compound.isomeric_smiles)
-		
-	        vioxx = Compound.from_cid(compound.cid)
-                try:
-		    st.write(vioxx.molecular_formula)
-	  
-                    st.write(vioxx.molecular_weight)
-	    	    st.write(vioxx.iupac_name)
-	
-                    st.write(vioxx.xlogp)
-	
-	
+            results = pcp.get_compounds(user_compound,'name')
+            for compound in results:
+                st.write(compound.cid)
+                st.write(compound.isomeric_smiles)
+        
+                vioxx = Compound.from_cid(compound.cid)
+                st.write(vioxx.molecular_formula)
+                st.write(vioxx.molecular_weight)
+                st.write(vioxx.iupac_name)
+                st.write(vioxx.xlogp)
+    
+    
         user_smile = st.text_input("Enter SMILES format")
         if user_smile != None:
-	    pcp.get_compounds(user_smile, 'smiles')
+            pcp.get_compounds(user_smile, 'smiles')
 
 
 if __name__ == '__main__':
     main()
-        
