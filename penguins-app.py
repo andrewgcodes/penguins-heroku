@@ -224,7 +224,6 @@ def main():
         component_3dmol()
 	
     elif choice == "EnzymeKinetics":
-        st.write("This is more of a playground than a super accurate tool so take it with a grain of salt. It assumes that A is the substrate of enzyme 1, and enzyme 1 is the substrate of enzyme 2.")
 	duration = st.text_input("Enter experiment duration in minutes", 120)
         enzyme1kcat = st.text_input("Enter enzyme #1 kcat", 200)
         enzyme2kcat = st.text_input("Enter enzyme #2 kcat",30)
