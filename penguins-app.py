@@ -11,6 +11,19 @@ import numpy as np
 from PIL import Image 
 import requests as req
 from stmol import component_3dmol
+from rdkit import Chem
+from rdkit.Chem import Descriptors, Lipinski
+
+def lipinski(smile):
+	# Convert into Chem object
+	mol = Chem.MolFromSmiles(smile)
+
+	MolWt = Descriptors.MolWt(mol)
+	MolLogP = Descriptors.MolLogP(mol)
+	NumHDonors = Lipinski.NumHDonors(mol)
+	NumHAcceptors = Lipinski.NumHAcceptors(mol)
+
+	return NumHDonors, NumHAcceptors, MolWt, MolLogP
 
 def delta(x,y):
     return 0 if x == y else 1
@@ -63,7 +76,7 @@ def main():
     """A Simple Streamlit App """
     st.title("BioInformatics App")
 
-    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer"]
+    activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "Lipinski"]
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
@@ -209,6 +222,26 @@ def main():
         st.subheader("Look at a molecule! Pre-loaded example is the Covid-19 Spike Protein.")
 
         component_3dmol()
+        
+    elif choice == "Lipinski":
+        
+        st.title("Molecular Descriptors Calculator")
+        user_smile = st.text_input("Enter SMILES format")
+
+        hDonar = (lipinski(user_smile)[0])
+        hAccep = (lipinski(user_smile)[1])
+        molWgt = (lipinski(user_smile)[2])
+        logPVa = (lipinski(user_smile)[3])
+
+        st.header("Lipinski's Descriptors Values")
+
+        st.write(pd.DataFrame({
+
+            'H Donars': pd.Series(hDonar),
+            'H Acceptors': pd.Series(hAccep),
+            'Molecular Mass (Dalton)': pd.Series(molWgt),
+            'LogP': pd.Series(logPVa)
+                }))
 
 
 
