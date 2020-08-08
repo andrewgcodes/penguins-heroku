@@ -238,7 +238,7 @@ def main():
                 st.write('Molecular Formula: '+vioxx.molecular_formula)
                 st.write('Molecular Weight: '+str(vioxx.molecular_weight))
                 st.write('IUPAC Name: '+vioxx.iupac_name)
-                st.write('xlogp value: '+vioxx.xlogp)
+                st.write('xlogp value: '+str(vioxx.xlogp))
     
     
 
