@@ -228,7 +228,7 @@ def main():
     elif choice == "ChemicalSearch":
         st.title("Search for chemicals and get info.")
         user_compound = st.text_input("Enter compound name")
-        if user_compound != None:
+        if user_compound is not None:
 	    results = pcp.get_compounds(user_compound,'name')
 	    for compound in results:
 	        st.write(compound.cid)
