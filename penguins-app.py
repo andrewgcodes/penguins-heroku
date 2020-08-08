@@ -226,22 +226,22 @@ def main():
         component_3dmol()
     
     elif choice == "ChemicalSearch":
-        st.title("Search for chemicals and get info.")
-        user_compound = st.text_input("Enter compound name")
+        st.title("Search for chemicals and get info. Pre-loaded example: imatinib")
+        user_compound = st.text_input("Enter compound name", 'imatinib')
         if user_compound is not None:
             results = pcp.get_compounds(user_compound,'name')
             for compound in results:
-                st.write(compound.cid)
-                st.write(compound.isomeric_smiles)
+                st.write('Compound ID: '+ compound.cid)
+                st.write('SMILES: '+compound.isomeric_smiles)
         
                 vioxx = Compound.from_cid(compound.cid)
-                st.write(vioxx.molecular_formula)
-                st.write(vioxx.molecular_weight)
-                st.write(vioxx.iupac_name)
+                st.write('Molecular Formula: '+vioxx.molecular_formula)
+                st.write('Molecular Weight: '+vioxx.molecular_weight)
+                st.write('IUPAC Name: '+vioxx.iupac_name)
                 st.write(vioxx.xlogp)
     
     
-        user_smile = st.text_input("Enter SMILES format")
+        user_smile = st.text_input("Enter SMILES format", 'CC1=C(C=C(C=C1)NC(=O)C2=CC=C(C=C2)CN3CCN(CC3)C)NC4=NC=CC(=N4)C5=CN=CC=C5')
         if user_smile != None:
             pcp.get_compounds(user_smile, 'smiles')
 
