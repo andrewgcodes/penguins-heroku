@@ -225,34 +225,32 @@ def main():
 
         component_3dmol()
 	
-
     elif choice == "ChemicalSearch":
-        
-        st.title("Molecular Descriptors Calculator [UNDER CONSTRUCTION]")
+        st.title("Search for chemicals and get info.")
 	user_compound = st.text_input("Enter compound name")
-
         if user_compound != None:
 	    results = pcp.get_compounds(user_compound, 'name')
 	    for compound in results:
+		st.write(compound.cid)
 	        st.write(compound.isomeric_smiles)
+		
+		vioxx = Compound.from_cid(compound.cid)
+                try:
+		    print vioxx.molecular_formula
+		except:
+		    pass
+		try:
+                    print vioxx.molecular_weight
+		except:
+		    pass
+		try:
+                    print vioxx.xlogp
+		except:
+		    pass
+
         user_smile = st.text_input("Enter SMILES format")
 	if user_smile != None:
 	    pcp.get_compounds(user_smile, 'smiles')
-#        hDonar = (lipinski(user_smile)[0])
- #       hAccep = (lipinski(user_smile)[1])
-#       molWgt = (lipinski(user_smile)[2])
-#        logPVa = (lipinski(user_smile)[3])
-
-       # st.header("Lipinski's Descriptors Values")
-
-   #     st.write(pd.DataFrame({
-
-#            'H Donars': pd.Series(hDonar),
-   #         'H Acceptors': pd.Series(hAccep),
-#            'Molecular Mass (Dalton)': pd.Series(molWgt),
-       #     'LogP': pd.Series(logPVa)
-      #          }))
-
 
 
 if __name__ == '__main__':
