@@ -8,3 +8,4 @@ neatbio == 0.0.2
 requests == 2.24.0
 stmol == 0.0.4
 chempy == 0.7.12
+kinetics == 1.4.1
