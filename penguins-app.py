@@ -253,7 +253,7 @@ def main():
 	model.plot_substrate('A')
 	model.plot_substrate('B')
 	model.plot_substrate('C', plot=True)
-	
+	st.pyplot()
     elif choice == "Lipinski":
         
         st.title("Molecular Descriptors Calculator [UNDER CONSTRUCTION]")
