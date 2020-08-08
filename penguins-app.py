@@ -224,36 +224,8 @@ def main():
         component_3dmol()
 	
     elif choice == "EnzymeKinetics":
-	duration = st.text_input("Enter experiment duration in minutes",120)
-        enzyme1kcat = st.text_input("Enter enzyme #1 kcat",200)
-        enzyme2kcat = st.text_input("Enter enzyme #2 kcat",30)
-        enzyme1km = st.text_input("Enter enzyme #1 km",8000)
-        enzyme2km = st.text_input("Enter enzyme #2 km",2000)
-        substrateConc = st.text_input("Enter primary substrate concentration (A)",10000)
-        enzyme1Conc = st.text_input("Enter enzyme 1 concentration (B)",4)
-        enzyme2Conc = st.text_input("Enter enzyme 2 concentration (C)",10)
+	st.subheader("[UNDER CONSTRUCTION]")
 
-	enzyme_1 = kinetics.Uni(kcat='enz1_kcat', kma='enz1_km', enz='enz_1', a='A', substrates=['A'], products=['B'])
-
-        enzyme_1.parameters = {'enz1_kcat' : enzyme1kcat,'enz1_km' : enzyme1km}
-
-        enzyme_2 = kinetics.Uni(kcat='enz2_kcat', kma='enz2_km', enz='enz_2', a='B', substrates=['B'], products=['C'])
-
-        enzyme_2.parameters = {'enz2_kcat' : enzyme2kcat, 'enz2_km' : enzyme2km}
-
-	model = kinetics.Model(logging=False)
-	model.append(enzyme_1)
-	model.append(enzyme_2)
-	model.set_time(0,duration,1000) 
-
-	model.species = {"A" : substrateConc,"enz_1" : enzyme1Conc,"enz_2" : enzyme2Conc}
-	model.setup_model()
-
-	model.run_model()
-	model.plot_substrate('A')
-	model.plot_substrate('B')
-	model.plot_substrate('C',plot=True)
-	st.pyplot()
     elif choice == "Lipinski":
         
         st.title("Molecular Descriptors Calculator [UNDER CONSTRUCTION]")
