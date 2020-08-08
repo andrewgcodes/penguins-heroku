@@ -231,12 +231,12 @@ def main():
         if user_compound is not None:
             results = pcp.get_compounds(user_compound,'name')
             for compound in results:
-                st.write('Compound ID: '+ compound.cid)
+                st.write('Compound ID: '+ str(compound.cid))
                 st.write('SMILES: '+compound.isomeric_smiles)
         
                 vioxx = Compound.from_cid(compound.cid)
                 st.write('Molecular Formula: '+vioxx.molecular_formula)
-                st.write('Molecular Weight: '+vioxx.molecular_weight)
+                st.write('Molecular Weight: '+str(vioxx.molecular_weight))
                 st.write('IUPAC Name: '+vioxx.iupac_name)
                 st.write(vioxx.xlogp)
     
