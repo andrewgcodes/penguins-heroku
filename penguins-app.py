@@ -11,21 +11,22 @@ import numpy as np
 from PIL import Image 
 import requests as req
 from stmol import component_3dmol
-#from rdkit import Chem
-#from rdkit.Chem import Descriptors, Lipinski
+from rdkit import Chem
+from rdkit.Chem import Descriptors, Lipinski
 import kinetics
 import pubchempy as pcp
 from pubchempy import get_compounds, Compound
-#def lipinski(smile):
-    # Convert into Chem object
-#    mol = Chem.MolFromSmiles(smile)
 
-#    MolWt = Descriptors.MolWt(mol)
-#    MolLogP = Descriptors.MolLogP(mol)
-#    NumHDonors = Lipinski.NumHDonors(mol)
-#    NumHAcceptors = Lipinski.NumHAcceptors(mol)
+def lipinski(smile):
+	# Convert into Chem object
+	mol = Chem.MolFromSmiles(smile)
 
-#    return NumHDonors, NumHAcceptors, MolWt, MolLogP
+	MolWt = Descriptors.MolWt(mol)
+	MolLogP = Descriptors.MolLogP(mol)
+	NumHDonors = Lipinski.NumHDonors(mol)
+	NumHAcceptors = Lipinski.NumHAcceptors(mol)
+
+	return NumHDonors, NumHAcceptors, MolWt, MolLogP
 
 def delta(x,y):
     return 0 if x == y else 1
@@ -239,8 +240,25 @@ def main():
                 st.write('Molecular Weight: '+str(vioxx.molecular_weight))
                 st.write('IUPAC Name: '+vioxx.iupac_name)
                 st.write('xlogp value: '+str(vioxx.xlogp))
-    
-    
+                
+        st.header("Input SMILE")
+        user_smile = st.text_input("Enter text below")
+
+        # Calculation
+        hDonar = (lipinski(user_smile)[0])
+        hAccep = (lipinski(user_smile)[1])
+        molWgt = (lipinski(user_smile)[2])
+        logPVa = (lipinski(user_smile)[3])
+
+        st.header("Lipinski's Descriptors Values")
+
+        st.write(pd.DataFrame({
+
+            'H Donars': pd.Series(hDonar),
+            'H Acceptors': pd.Series(hAccep),
+            'Molecular Mass (Dalton)': pd.Series(molWgt),
+            'LogP': pd.Series(logPVa)
+                }))
 
 
 if __name__ == '__main__':
