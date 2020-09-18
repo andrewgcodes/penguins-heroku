@@ -11,6 +11,7 @@ import numpy as np
 from PIL import Image 
 import requests as req
 from stmol import component_3dmol
+import rdkit
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Lipinski
 import kinetics
