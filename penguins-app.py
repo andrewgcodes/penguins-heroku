@@ -64,15 +64,14 @@ def at_content(seq):
 
 
 def main():
-    """A Simple Streamlit App """
-    st.title("BioInformatics App")
+    st.title("Bioinformatics App")
     st.set_option('deprecation.showfileUploaderEncoding', False)
 
     activity = ['Intro','SequenceAnalysis','DotPlot','ProteinSearch',"MoleculeVisualizer", "ChemicalSearch"]
     choice = st.sidebar.selectbox("Select Activity",activity)
     if choice == 'Intro':
         st.subheader("Intro")
-        st.write(""" This is a bioinformatics web app made with Python and Streamlit. Use the left panel dropdown to choose the various features to use. """)
+        st.write(""" This is a bioinformatics web app made with Python and Streamlit. Use the left panel dropdown to choose the various features to use.""")
     elif choice == "SequenceAnalysis":
         st.subheader("DNA Sequence Analysis")
 
