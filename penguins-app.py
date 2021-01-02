@@ -72,7 +72,7 @@ def main():
     if choice == 'Intro':
         st.subheader("Intro")
         st.write(""" This is a bioinformatics web app made with Python and Streamlit. Use the left panel dropdown to choose the various features to use.""")
-        image = Image.open("http://u.filein.io/ybrKb0PaqH.png")
+        image = Image.open("overviewpicture.png")
         st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels='RGB', output_format='auto')
 
     elif choice == "SequenceAnalysis":
