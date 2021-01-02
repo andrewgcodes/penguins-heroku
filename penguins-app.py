@@ -73,7 +73,7 @@ def main():
         st.subheader("Intro")
         st.write(""" This is a bioinformatics web app made with Python and Streamlit. Use the left panel dropdown to choose the various features to use.""")
         image = Image.open("overviewpicture.png")
-        st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels='RGB', output_format='auto')
+        st.image(image, use_column_width=True)
 
     elif choice == "SequenceAnalysis":
         st.subheader("DNA Sequence Analysis")
