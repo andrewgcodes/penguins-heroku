@@ -209,9 +209,7 @@ def main():
 
 
     elif choice == "MoleculeVisualizer":
-        st.subheader("Look at a molecule! Pre-loaded example is the Covid-19 Spike Protein. Thank you to: https://github.com/napoles-uach/streamlit_3dmol
-
-")
+        st.subheader("Look at a molecule! Pre-loaded example is the Covid-19 Spike Protein. Thank you to: https://github.com/napoles-uach/streamlit_3dmol")
 
         component_3dmol()
     
