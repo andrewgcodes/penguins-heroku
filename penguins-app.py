@@ -14,6 +14,8 @@ from stmol import component_3dmol
 import kinetics
 import pubchempy as pcp
 from pubchempy import get_compounds, Compound
+import kora.install.rdkit
+
 from rdkit.Chem import AllChem
 from rdkit.Chem import Draw
 

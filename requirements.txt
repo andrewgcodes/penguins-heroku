@@ -10,3 +10,4 @@ stmol == 0.0.4
 kinetics == 1.4.1
 pubchempy == 1.0.4
 cirpy
+kora
