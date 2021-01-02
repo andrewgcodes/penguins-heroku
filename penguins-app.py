@@ -14,7 +14,8 @@ from stmol import component_3dmol
 import kinetics
 import pubchempy as pcp
 from pubchempy import get_compounds, Compound
-
+from rdkit.Chem import AllChem
+from rdkit.Chem import Draw
 
 def delta(x,y):
     return 0 if x == y else 1
@@ -221,7 +222,9 @@ def main():
             for compound in results:
                 st.write('Compound ID: '+ str(compound.cid))
                 st.write('SMILES: '+compound.isomeric_smiles)
-        
+                mole = AllChem.MolFromSmiles(compound.isomeric_smiles)
+
+                st.write(Draw.MolToMPL(mole), unsafe_allow_html=True)
                 vioxx = Compound.from_cid(compound.cid)
                 st.write('Molecular Formula: '+vioxx.molecular_formula)
                 st.write('Molecular Weight: '+str(vioxx.molecular_weight))
